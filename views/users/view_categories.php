@@ -1,3 +1,25 @@
+<script>
+
+function delete_cat(id){
+     $.ajax({
+        type: "GET",
+        url:  "<?php echo site_url();?>admin/delete_categories/"+id,
+        success: function(data){
+            $('#cat_'+id).fadeOut("slow");
+        },
+        error: function(){
+        },
+        beforeSend: function(){
+            $('#cat_'+id).html("");
+        }
+    });
+}
+
+
+</script>
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -62,19 +84,19 @@ $(function($) {
      <div class="main_content">
     <div class="menu">
                     <ul>
-                    <li><a class="current" href="<?php echo site_url();?>admin/admin_home/">Admin Home</a></li>
-                    <li><a href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a class="current" href="index.html">Admin Home</a></li>
+                    <li><a class="current" href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/admin_categories/">Add Category</a></li>
+                      <li><a href="<?php echo site_url();?>admin/admin_categories/">Add Category</a></li>
                         <li><a href="<?php echo site_url();?>admin/view_categories/">View Categories</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
-                    <li><a href="login.html">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a href="javascript:void(0);">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Add New Album</a></li>
+                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Create Album</a></li>
                         <li><a href="<?php echo site_url();?>admin/view_albums/" title="">View Albums</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -125,12 +147,35 @@ $(function($) {
                     </ul>
                     </div> 
          
-         <div class="right_content">            
+         <div class="right_content" style="width:870px; text-align:center;">            
         
-    <h2>Admin Home page Under Work</h2> 
+    <h2>Photo Album Categories</h2> 
                     
      
-         
+         <table id="rounded-corner" style="margin-left:110px;">
+    <thead>
+    	<tr>
+        	<th scope="col" class="rounded-company"></th>
+            <th scope="col" class="rounded">Category Name</th>
+            <th scope="col" class="rounded">Edit</th>
+            <th scope="col" class="rounded-q4">Delete</th>
+        </tr>
+    </thead>
+        <tfoot>
+    	
+    </tfoot>
+    <tbody>
+        <?php while($cat = mysql_fetch_array($variables_array[categories])) {?>
+    	<tr id="cat_<?php echo $cat['cat_id']?>">
+            <td><input type="checkbox" name="" /></td>
+            <td><?php echo $cat['category_name']?></td>
+            <td><a href="<?php echo site_url();?>admin/edit_categories/<?php echo $cat['cat_id']?>"><img src="<?php echo site_url();?>public/images/user_edit.png" alt="" title="" border="0" /></a></td>
+            <td><a href="javascript:void(0);" onclick="delete_cat('<?php echo $cat['cat_id']?>')" class="ask"><img src="<?php echo site_url();?>public/images/trash.png" alt="" title="" border="0" /></a></td>
+        </tr>
+      
+        <?php } ?>
+    </tbody>
+</table> 
       
      
      </div>

@@ -1,3 +1,29 @@
+<script>
+
+function delete_album(id){
+    var r=confirm("Are you Sure? All Images will also deleted")
+    if(r==true){
+     $.ajax({
+        type: "GET",
+        url:  "<?php echo site_url();?>admin/delete_album/"+id,
+        success: function(data){
+            $('#album_'+id).fadeOut("slow");
+        },
+        error: function(){
+        },
+        beforeSend: function(){
+            $('#album_'+id).html("");
+        }
+    });
+}
+}
+
+
+
+</script>
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -62,19 +88,19 @@ $(function($) {
      <div class="main_content">
     <div class="menu">
                     <ul>
-                    <li><a class="current" href="<?php echo site_url();?>admin/admin_home/">Admin Home</a></li>
+                    <li><a href="<?php echo site_url();?>admin/admin_home">Admin Home</a></li>
                     <li><a href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/admin_categories/">Add Category</a></li>
+                      <li><a href="<?php echo site_url();?>admin/admin_categories/">Add Category</a></li>
                         <li><a href="<?php echo site_url();?>admin/view_categories/">View Categories</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
-                    <li><a href="login.html">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a class="current" href="javascript:void(0);">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Add New Album</a></li>
+                         <li><a href="<?php echo site_url();?>admin/add_album/" title="">Create Album</a></li>
                         <li><a href="<?php echo site_url();?>admin/view_albums/" title="">View Albums</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -88,36 +114,7 @@ $(function($) {
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     <li><a href="login.html">Price Package<!--[if IE 7]><!--></a><!--<![endif]-->
-                    <!--[if lte IE 6]><table><tr><td><![endif]-->
-<!--                        <ul>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a class="sub1" href="" title="">sublevel2[if IE 7]><!</a><![endif]
-                        [if lte IE 6]><table><tr><td><![endif]
-                            <ul>
-                                <li><a href="" title="">sublevel link</a></li>
-                                <li><a href="" title="">sulevel link</a></li>
-                                <li><a class="sub2" href="#nogo">sublevel3[if IE 7]><!</a><![endif]
-                        
-                                [if lte IE 6]><table><tr><td><![endif]
-                                    <ul>
-                                        <li><a href="#nogo">Third level-1</a></li>
-                                        <li><a href="#nogo">Third level-2</a></li>
-                                        <li><a href="#nogo">Third level-3</a></li>
-                                        <li><a href="#nogo">Third level-4</a></li>
-                                    </ul>
-                        
-                                [if lte IE 6]></td></tr></table></a><![endif]
-                                </li>
-                                <li><a href="" title="">sulevel link</a></li>
-                            </ul>
-                        [if lte IE 6]></td></tr></table></a><![endif]
-                        </li>
                     
-                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>-->
-                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     <li><a href="">About Us</a></li>
                     <li><a href="">Experiences</a></li>
@@ -125,12 +122,43 @@ $(function($) {
                     </ul>
                     </div> 
          
-         <div class="right_content">            
+         <div class="right_content" style="width:870px; text-align:center;">            
         
-    <h2>Admin Home page Under Work</h2> 
+    <h2>Albums</h2> 
                     
      
-         
+         <table id="rounded-corner" style="margin-left:110px;">
+    <thead>
+    	<tr>
+        	<th scope="col" class="rounded-company"></th>
+            <th scope="col" class="rounded">Album Name</th>
+            <th scope="col" class="rounded">Created Date</th>
+            <th scope="col" class="rounded">Category</th>
+            <th scope="col" class="rounded">Status</th>
+            <th scope="col" class="rounded">Images</th>
+            <th scope="col" class="rounded">Edit</th>
+            <th scope="col" class="rounded-q4">Delete</th>
+        </tr>
+    </thead>
+        <tfoot>
+    	
+    </tfoot>
+    <tbody>
+        <?php while($albums = mysql_fetch_array($variables_array[albums])) {?>
+    	<tr id="album_<?php echo $albums['album_id']?>">
+            <td><input type="checkbox" name="" /></td>
+            <td><?php echo $albums['album_name']?></td>
+            <td><?php echo $albums['created_date']?></td>
+            <td><?php echo $albums['category_name']?></td>
+            <td><?php echo $albums['status']?></td>
+            <td><a href="<?php echo site_url();?>admin/album_images/<?php echo $albums['album_id']?>"><img src="<?php echo site_url();?>public/images/camera_icon_small.jpg" alt="" title="" border="0" /></a></td>
+            <td><a href="<?php echo site_url();?>admin/edit_album/<?php echo $albums['album_id']?>"><img src="<?php echo site_url();?>public/images/user_edit.png" alt="" title="" border="0" /></a></td>
+            <td><a href="javascript:void(0);" onclick="delete_album('<?php echo $albums['album_id']?>')"><img src="<?php echo site_url();?>public/images/trash.png" alt="" title="" border="0" /></a></td>
+        </tr>
+      
+        <?php } ?>
+    </tbody>
+</table> 
       
      
      </div>

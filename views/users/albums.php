@@ -50,9 +50,9 @@
                             <div class="relative">
                                 <div id="gallery">
                                     <ul id="myRoundabout">
-                                        <li><img src="<?php echo site_url();?>public/images/img1.jpg" alt=""></li>
-                                        <li><img src="<?php echo site_url();?>public/images/img2.jpg" alt=""></li>
-                                        <li><img src="<?php echo site_url();?>public/images/img3.jpg" alt=""></li>
+                                        <?php while($images = mysql_fetch_array($variables_array[gallery])) {?>
+					<li><img src="<?php echo site_url();?>public/gallery-images/<?php echo $images['image_name'];?>" alt=""></li>
+                                        <?php }?>
                                     </ul>
                                 </div>
                             </div>
@@ -66,12 +66,15 @@
                                         <h2>Categories</h2>
                                         <div class="pad">
                                             <ul class="nav">
-                                                <li class="selected"><a href="#Fashion">Fashion</a></li>
-                                                <li><a href="#3D">3D Objects</a></li>
+                                                <?php while($cat = mysql_fetch_array($variables_array[categories])) {?>
+                                                
+                                                <li class="selected"><a href="#<?php echo $cat['category_name']?>"><?php echo $cat['category_name']?></a></li>
+                                                <?php }?>
+<!--                                                <li><a href="#3D">3D Objects</a></li>
                                                 <li><a href="#Wedding">Wedding</a></li>
                                                 <li><a href="#Reportage">Reportage</a></li>
                                                 <li><a href="#Advertising">Advertising</a></li>
-                                                <li><a href="#Portrait">Portrait</a></li>
+                                                <li><a href="#Portrait">Portrait</a></li>-->
                                             </ul>
                                         </div>
                                     </article>

@@ -10,7 +10,7 @@ class connection {
 
     function connection() {
         $this->host	= "localhost";
-        $this->db	= "photogallery";
+        $this->db	= "ambreen_hassan";
         $this->user	= "root";
         $this->password = "";
         try {

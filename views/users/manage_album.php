@@ -62,19 +62,19 @@ $(function($) {
      <div class="main_content">
     <div class="menu">
                     <ul>
-                    <li><a class="current" href="<?php echo site_url();?>admin/admin_home/">Admin Home</a></li>
+                    <li><a  href="<?php echo site_url();?>admin/admin_home/">Admin Home</a></li>
                     <li><a href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/admin_categories/">Add Category</a></li>
-                        <li><a href="<?php echo site_url();?>admin/view_categories/">View Categories</a></li>
+                        <li><a href="<?php echo site_url();?>admin/admin_categories/" title="">Add Category</a></li>
+                        <li><a href="<?php echo site_url();?>admin/view_categories/" title="">View Categories</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
-                    <li><a href="login.html">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a class="current" href="javascript:void(0);">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Add New Album</a></li>
+                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Create Album</a></li>
                         <li><a href="<?php echo site_url();?>admin/view_albums/" title="">View Albums</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -88,36 +88,6 @@ $(function($) {
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     <li><a href="login.html">Price Package<!--[if IE 7]><!--></a><!--<![endif]-->
-                    <!--[if lte IE 6]><table><tr><td><![endif]-->
-<!--                        <ul>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        <li><a class="sub1" href="" title="">sublevel2[if IE 7]><!</a><![endif]
-                        [if lte IE 6]><table><tr><td><![endif]
-                            <ul>
-                                <li><a href="" title="">sublevel link</a></li>
-                                <li><a href="" title="">sulevel link</a></li>
-                                <li><a class="sub2" href="#nogo">sublevel3[if IE 7]><!</a><![endif]
-                        
-                                [if lte IE 6]><table><tr><td><![endif]
-                                    <ul>
-                                        <li><a href="#nogo">Third level-1</a></li>
-                                        <li><a href="#nogo">Third level-2</a></li>
-                                        <li><a href="#nogo">Third level-3</a></li>
-                                        <li><a href="#nogo">Third level-4</a></li>
-                                    </ul>
-                        
-                                [if lte IE 6]></td></tr></table></a><![endif]
-                                </li>
-                                <li><a href="" title="">sulevel link</a></li>
-                            </ul>
-                        [if lte IE 6]></td></tr></table></a><![endif]
-                        </li>
-                    
-                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>-->
-                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     <li><a href="">About Us</a></li>
                     <li><a href="">Experiences</a></li>
@@ -125,12 +95,86 @@ $(function($) {
                     </ul>
                     </div> 
          
-         <div class="right_content">            
-        
-    <h2>Admin Home page Under Work</h2> 
+         <style type="text/css">
+             #browse_img{
+                 float:left;
+                 margin-top: -28px;
+                 margin-left: 138px;
+                 
+             }
+             #browse_img:hover{
+                
+                 opacity:0.8;
+             }
+             #upload{
+                 margin-top:9px;
+                 margin-right:175px;
+             }
+         
+         
+         </style>
+         
+         <div class="right_content" style="width:870px; text-align:center;">            
+        <?php $album = mysql_fetch_array($variables_array[album]);?>
+    <h2><?php echo $album['album_name'];?> Album Images</h2> 
                     
      
+         <div class="form" style="width:700px !important; margin-left:114px;">
+         <form action="<?php echo site_url();?>admin/add_album_images/" method="POST" class="niceform" enctype="multipart/form-data">
          
+                <fieldset>
+                   <input type="hidden" name="album_id" value="<?php echo $album['album_id'];?>"/>
+                    <dl>
+                        <dt><label for="upload">Upload a File:</label></dt>
+                        <dd><input type="file" name="upload[]" id="upload" /><img src="<?php echo site_url();?>public/img/browse.png" id="browse_img"/>
+                        <div style="float:right;">
+                        <input type="checkbox" name="gallery[]"  value="0" /><label class="check_label">On Gallery</label>
+                        <input type="radio" name="album_cover[]"  value="0" /><label class="check_label">Album Cover</label>
+                        </div>
+                        </dd>
+                      
+                    </dl>
+                    
+                     <dl>
+                        <dt><label for="upload">Upload a File:</label></dt>
+                        <dd><input type="file" name="upload[]" id="upload" /><img src="<?php echo site_url();?>public/img/browse.png" id="browse_img"/>
+                         <div style="float:right;">
+                        <input type="checkbox" name="gallery[]"  value="1" /><label class="check_label">On Gallery</label>
+                        <input type="radio" name="album_cover[]"  value="1" /><label class="check_label">Album Cover</label>
+                        </div>
+                        </dd>
+                    </dl>
+                     <dl>
+                        <dt><label for="upload">Upload a File:</label></dt>
+                        <dd><input type="file" name="upload[]" id="upload" /><img src="<?php echo site_url();?>public/img/browse.png" id="browse_img"/>
+                         <div style="float:right;">
+                        <input type="checkbox" name="gallery[]"  value="2" /><label class="check_label">On Gallery</label>
+                        <input type="radio" name="album_cover[]"  value="2" /><label class="check_label">Album Cover</label>
+                        </div>
+                        </dd>
+                    </dl>
+                     <dl>
+                        <dt><label for="upload">Upload a File:</label></dt>
+                        <dd><input type="file" name="upload[]" id="upload" /><img src="<?php echo site_url();?>public/img/browse.png" id="browse_img"/>
+                         <div style="float:right;">
+                        <input type="checkbox" name="gallery[]"  value="3" /><label class="check_label">On Gallery</label>
+                        <input type="radio" name="album_cover[]"  value="3" /><label class="check_label">Album Cover</label>
+                        </div>
+                        </dd>
+                    </dl>
+                   
+                     
+                    
+                     <dl class="submit" style="width:689px;">
+                    <input type="submit" name="submit" id="submit" value="Submit" />
+                     </dl>
+                     
+                     
+                    
+                </fieldset>
+                
+         </form>
+         </div>  
       
      
      </div>

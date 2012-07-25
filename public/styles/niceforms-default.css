@@ -57,7 +57,7 @@ line-height:32px;
 .NFTextareaRightH {background:url(../img/textarea-r-off.gif) repeat-y 100% 100%;}
 /*Files*/
 .NFFileButton {padding-bottom:0; vertical-align:bottom; cursor:pointer; background:url(../img/file.gif) no-repeat 0 0; width:58px; height:34px;}
-.NFFile {position:relative;}
+.NFFile {position:relative; margin-bottom:5px;}
 .NFFile input.NFhidden {position:relative;  filter:alpha(opacity=0); opacity:0; z-index:2; cursor:pointer; text-align:left;}
 .NFFileNew {position:absolute; top:0px; left:0px; z-index:1;}
 /*Selects*/

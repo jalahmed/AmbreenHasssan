@@ -7,6 +7,12 @@ require_once("dao/userDAO.php");
 //require_once("helpers/EasyGoogleMap.class.php");
 class usersController extends application_controller {
 
+    public function index() {
+         $userDAO =new userDAO();
+         $gallery=$userDAO->get_images_gallery();
+         
+        return $this->render("views/users/index.php", compact('gallery', 'var2', 'var3'));
+    }
     public function aboutus() {
 
         return $this->render("views/users/aboutus.php", compact('var', 'var2', 'var3'));
@@ -17,7 +23,10 @@ class usersController extends application_controller {
     }
 
     public function albums() {
-        return $this->render("views/users/albums.php", compact('var', 'var2', 'var3'));
+        $userDAO =new userDAO();
+         $gallery=$userDAO->get_images_gallery();
+         $categories=$userDAO->view_category();
+        return $this->render("views/users/albums.php", compact('gallery', 'categories', 'var3'));
     }
 
     public function contactus() {

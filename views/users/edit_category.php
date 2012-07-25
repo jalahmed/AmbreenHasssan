@@ -62,20 +62,20 @@ $(function($) {
      <div class="main_content">
     <div class="menu">
                     <ul>
-                    <li><a class="current" href="<?php echo site_url();?>admin/admin_home/">Admin Home</a></li>
-                    <li><a href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a class="current" href="index.html">Admin Home</a></li>
+                    <li><a class="current" href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/admin_categories/">Add Category</a></li>
-                        <li><a href="<?php echo site_url();?>admin/view_categories/">View Categories</a></li>
+                        <li><a href="<?php echo site_url();?>admin/admin_categories/" title="">Add Category</a></li>
+                        <li><a href="<?php echo site_url();?>admin/view_categories/" title="">View Categories</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     <li><a href="login.html">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Add New Album</a></li>
-                        <li><a href="<?php echo site_url();?>admin/view_albums/" title="">View Albums</a></li>
+                        <li><a href="" title="">Add New Album</a></li>
+                        <li><a href="" title="">View Albums</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
@@ -125,12 +125,30 @@ $(function($) {
                     </ul>
                     </div> 
          
-         <div class="right_content">            
+         <div class="right_content" style="width:870px; text-align:center;">            
         
-    <h2>Admin Home page Under Work</h2> 
+    <h2>Photo Album Categories</h2> 
                     
-     
+     <?php $cat = mysql_fetch_array($variables_array[categories])?>
+         <div class="form" style="width:700px !important; margin-left:114px;">
+         <form action="<?php echo site_url();?>admin/edit_cat/" method="POST" class="niceform">
          
+                <fieldset>
+                    <dl>
+                        <dt><label for="email">Category Title:</label></dt>
+                        <dd><input type="text" value="<?php echo $cat['category_name']?>" name="cat_name" size="50"/></dd>
+                        <input type="hidden" value="<?php echo $cat['cat_id']?>" name="cat_id"/>
+                    </dl>
+                     <dl class="submit" style="width:689px;">
+                    <input type="submit" name="submit" id="submit" value="Submit" />
+                     </dl>
+                     
+                     
+                    
+                </fieldset>
+                
+         </form>
+         </div>  
       
      
      </div>

@@ -17,6 +17,11 @@
 <script type="text/javascript" src="<?php echo site_url();?>public/scripts/script.js"></script>
 
 </head>
+<?php 
+ $userDAO =new userDAO();
+ $gallery=$userDAO->get_images_gallery();
+?>
+
 <body id="page1">
 <div class="body1">
 	<div class="body2">
@@ -46,12 +51,14 @@
 					<div class="relative">
 						<div id="gallery">
 							<ul id="myRoundabout">
-								<li><img src="<?php echo site_url();?>public/images/img1.jpg" alt=""></li>
-								<li><img src="<?php echo site_url();?>public/images/img2.jpg" alt=""></li>
+                                                            <?php while($images = mysql_fetch_array($gallery)) {?>
+								<li><img src="<?php echo site_url();?>public/gallery-images/<?php echo $images['image_name'];?>" alt=""></li>
+                                                                <?php }?>
+<!--								<li><img src="<?php echo site_url();?>public/images/img2.jpg" alt=""></li>
 								<li><img src="<?php echo site_url();?>public/images/img3.jpg" alt=""></li>
 								<li><img src="<?php echo site_url();?>public/images/img4.jpg" alt=""></li>
 								<li><img src="<?php echo site_url();?>public/images/img5.jpg" alt=""></li>
-								<li><img src="<?php echo site_url();?>public/images/img6.jpg" alt=""></li>
+								<li><img src="<?php echo site_url();?>public/images/img6.jpg" alt=""></li>-->
 							</ul>
 						</div>
 					</div>

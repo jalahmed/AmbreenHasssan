@@ -91,7 +91,7 @@ padding-right:20px;
 .main_content{
 margin:0 auto;
 width:900px;
-height:auto;
+min-height:500px;
 padding:0px 0 50px 0;
 background:url(../images/menu_bg.jpg) no-repeat center top #fff;
 }
@@ -456,4 +456,38 @@ padding: 2px 5px 2px 5px;
 margin-right: 2px;
 border: 1px solid #f3f3f3;
 color: #ccc;
+}
+.mid-content-holder{
+    float:left;
+    width:100%;
+}
+.top-portion{
+    float:left;
+    width:894px;
+    height:25px;
+    background-color: #fff;
+    border-radius: 10px 10px 0px 0px;
+}
+.mid-portion{
+    float:left;
+    width:894px;
+    height:525px;
+    background-color: #fff;
+}
+.left-menu{
+    float:left;
+    width:220px;
+    border:1px solid #ccc;
+    
+}
+.menu-heading{
+    float:left;
+    width:100%;
+}
+.menu-heading h1{
+    float:left;
+    width:100%;
+    color:#000;
+    font-weight: bold;
+    font-size: 14px;
 }

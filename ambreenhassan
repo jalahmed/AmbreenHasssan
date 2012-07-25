@@ -1,0 +1,83 @@
+/*
+SQLyog Enterprise - MySQL GUI v6.5
+MySQL - 5.1.41 : Database - ambreen_hassan
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+create database if not exists `ambreen_hassan`;
+
+USE `ambreen_hassan`;
+
+/*Table structure for table `albums` */
+
+DROP TABLE IF EXISTS `albums`;
+
+CREATE TABLE `albums` (
+  `album_id` int(11) NOT NULL AUTO_INCREMENT,
+  `album_name` varchar(255) NOT NULL,
+  `created_date` date DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `cat_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`album_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `albums` */
+
+insert  into `albums`(`album_id`,`album_name`,`created_date`,`status`,`cat_id`) values (6,'Wedding','2012-07-26','display',7),(7,'babies','2012-07-26','display',8);
+
+/*Table structure for table `categories` */
+
+DROP TABLE IF EXISTS `categories`;
+
+CREATE TABLE `categories` (
+  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`cat_id`,`category_name`),
+  UNIQUE KEY `cat_id` (`cat_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+/*Data for the table `categories` */
+
+insert  into `categories`(`cat_id`,`category_name`) values (6,'portfolio'),(7,'wedding'),(8,'solo shoot');
+
+/*Table structure for table `images` */
+
+DROP TABLE IF EXISTS `images`;
+
+CREATE TABLE `images` (
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `album_id` int(11) DEFAULT NULL,
+  `image_name` varchar(255) DEFAULT NULL,
+  `display_on` int(1) DEFAULT NULL,
+  `album_cover` int(1) DEFAULT NULL,
+  PRIMARY KEY (`image_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+/*Data for the table `images` */
+
+insert  into `images`(`image_id`,`album_id`,`image_name`,`display_on`,`album_cover`) values (23,7,'img4.jpg',1,0),(22,7,'img1.jpg',1,0),(21,7,'75203_10150833168965753_50878275_n.jpg',0,0),(20,7,'522248_10150833190040753_1215733993_n.jpg',1,0),(19,6,'582492_10150833179205753_1028924720_n.jpg',1,0),(18,6,'480541_10150833186055753_1343712072_n.jpg',1,0),(17,6,'img4.jpg',1,1),(16,6,'img6.jpg',1,0);
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) NOT NULL,
+  `user_password` varbinary(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `users` */
+
+insert  into `users`(`id`,`user_name`,`user_password`) values (1,'admin@photos.com','954e41a461a8b70dac1a3e8bdeb5e525');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -7,12 +7,44 @@
   <title>Album Gallery</title>
   <link rel="stylesheet" href="<?php echo site_url();?>public/styles/gallery.css" type="text/css" />
   <script type="text/javascript" src="<?php echo site_url();?>public/scripts/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="<?php echo site_url();?>public/scripts/jquery.js"></script>
   <script type="text/javascript" src="<?php echo site_url();?>public/scripts/jquery.galleriffic.js"></script>
   <script type="text/javascript" src="<?php echo site_url();?>public/scripts/jquery.opacityrollover.js"></script>
   <!-- Display thumbnails only when JavaScript is disabled -->
   <script type="text/javascript"><!--
     document.write('<style type="text/css">.noscript { display: none; }</style>');
-  --></script>
+  -->
+  
+  function hideongallery(img_id){
+         $.ajax({
+        type: "GET",
+        url:  "<?php echo site_url();?>siteadmin/hidefromgallery/"+img_id,
+        success: function(data){
+            $('#image_modify' ).html(data);
+        },
+        error: function(){
+        },
+        beforeSend: function(){
+            $('#login_div').html("");
+        }
+    });
+  }
+  function showongallery(img_id){
+        $.ajax({
+        type: "GET",
+        url:  "<?php echo site_url();?>siteadmin/showongallery/"+img_id,
+        success: function(data){
+            $('#image_modify' ).html(data);
+        },
+        error: function(){
+        },
+        beforeSend: function(){
+            $('#login_div').html("");
+        }
+    });
+  }
+
+  </script>
 </head>
 
 <body>
@@ -42,17 +74,28 @@
       <div id="thumbs" class="navigation">
         <ul class="thumbs noscript">
 
-          <?php while($images = mysql_fetch_array($variables_array[album_photos])) {?>
-          <li>
+          <?php $i = 1; 
+          while($images = mysql_fetch_array($variables_array[album_photos])) {
+              
+              ?>
+          <li id="image_<?php echo $i;?>">
             <a class="thumb" href="<?php echo site_url(); ?>public/gallery-images/<?php echo $images['image_name'];?>">
               <img src="<?php echo site_url(); ?>public/gallery-images/thumbs/<?php echo $images['image_name'];?>" alt="Alamo Square" />
             </a>
             <div class="caption">
-              <div class="image-title">image title</div>
-              <div class="image-desc">Image Description</div>
+              <div class="image-title"><a href="<?php echo site_url()?>siteadmin/delete_image/?album_id=<?php echo $images['album_id']?>&image_id=<?php echo $images['image_id']?>" onclick="return confirm('Are you sure to delete')">Delete picture</a></div>
+              <div class="image-desc" id="image_modify">
+                  <?php if($images['display_on']==1){?>
+                  <a href="javascript:void(0);" onclick="hideongallery('<?php echo $images['image_id']?>')">Hide from Gallery</a>
+              <?php }else{?>
+                  <a href="javascript:void(0);" onclick="showongallery('<?php echo $images['image_id']?>')">Show on Gallery</a>
+             <?php }?>
+              </div>
             </div>
           </li>
-            <?php } ?>
+            <?php 
+            $i++;
+            } ?>
         </ul>
       </div>
 

@@ -62,20 +62,20 @@ $(function($) {
      <div class="main_content">
     <div class="menu">
                     <ul>
-                    <li><a  href="<?php echo site_url();?>admin/admin_home/">Admin Home</a></li>
+                    <li><a  href="<?php echo site_url();?>siteadmin/admin_home/">Admin Home</a></li>
                     <li><a href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/admin_categories/" title="">Add Category</a></li>
-                        <li><a href="<?php echo site_url();?>admin/view_categories/" title="">View Categories</a></li>
+                        <li><a href="<?php echo site_url();?>siteadmin/admin_categories/" title="">Add Category</a></li>
+                        <li><a href="<?php echo site_url();?>siteadmin/view_categories/" title="">View Categories</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     <li><a class="current" href="javascript:void(0);">Manage Albums<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/add_album/" title="">Create Album</a></li>
-                        <li><a href="<?php echo site_url();?>admin/view_albums/" title="">View Albums</a></li>
+                        <li><a href="<?php echo site_url();?>siteadmin/add_album/" title="">Create Album</a></li>
+                        <li><a href="<?php echo site_url();?>siteadmin/view_albums/" title="">View Albums</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
@@ -120,7 +120,7 @@ $(function($) {
                     
      
          <div class="form" style="width:700px !important; margin-left:114px;">
-         <form action="<?php echo site_url();?>admin/add_album_images/" method="POST" class="niceform" enctype="multipart/form-data">
+         <form action="<?php echo site_url();?>siteadmin/add_album_images/" method="POST" class="niceform" enctype="multipart/form-data">
          
                 <fieldset>
                    <input type="hidden" name="album_id" value="<?php echo $album['album_id'];?>"/>

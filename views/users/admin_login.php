@@ -42,7 +42,7 @@ ddaccordion.init({
         
         <div class="login_main">
         
-            <form action="<?php echo site_url();?>admin/loginAdmin" method="POST" name="admin_login">
+            <form action="<?php echo site_url();?>siteadmin/loginAdmin" method="POST" name="admin_login">
                 <div class="input_holder">
                     <label>Login:</label>
                     <input type="text" name="login_name" id="admin_login"/>

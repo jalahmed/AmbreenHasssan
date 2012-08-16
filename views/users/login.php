@@ -75,7 +75,7 @@ ddaccordion.init({
          
 <!--         <a href="#" class="forgot_pass">Forgot password</a> -->
          
-         <form action="<?php echo site_url();?>admin/loginAdmin" method="post" class="niceform">
+         <form action="<?php echo site_url();?>siteadmin/loginAdmin" method="post" class="niceform">
          
                 <fieldset>
                     <dl>

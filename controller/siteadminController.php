@@ -3,7 +3,7 @@
 include_once 'application_controller.php';
 require_once("dao/userDAO.php");
 require_once("helpers/resize-class.php");
-class adminController extends application_controller {
+class siteadminController extends application_controller {
 
     function index(){
         return $this->render("views/users/login.php", compact('var', 'var2','var3'));
@@ -19,7 +19,7 @@ class adminController extends application_controller {
 
     function admin_login_check() {
         if(!isset($_SESSION['admin_session_id']) && $_SESSION['admin_session_id']=="")
-            redirect_to(site_url()."admin/admin_login");
+            redirect_to(site_url()."siteadmin/admin_login");
     }
     public function loginAdmin() {
         
@@ -36,7 +36,7 @@ class adminController extends application_controller {
         
         if($answer!="1") {
             $_SESSION['message']= "Invalid Email Address!";
-             redirect_to(site_url()."admin/admin_login");
+             redirect_to(site_url()."siteadmin/admin_login");
         } else {
 
                 $userDAO =new userDAO();
@@ -44,7 +44,7 @@ class adminController extends application_controller {
                 
                 if($answer!="1") {
                    $_SESSION['message']= "Invalid Password";
-                    redirect_to(site_url()."admin/admin_login");
+                    redirect_to(site_url()."siteadmin/admin_login");
                 }  else {
                     $_SESSION['admin_name']=$user;
                     return $this->render("views/users/admin_home.php", compact('var', 'var2','var3'));
@@ -62,7 +62,7 @@ class adminController extends application_controller {
         unset($_SESSION['admin_name']);
         
         session_destroy();
-        redirect_to(site_url()."admin/admin_login");
+        redirect_to(site_url()."siteadmin/admin_login");
         
 // redirect_to(site_url()."home/index");
 
@@ -70,7 +70,7 @@ class adminController extends application_controller {
     public  function admin_home() {
         
         if(!isset($_SESSION['admin_name'])){
-             redirect_to(site_url()."admin/admin_login");
+             redirect_to(site_url()."siteadmin/admin_login");
         }
         
         return $this->render("views/users/admin_home.php", compact('var', 'var2','var3'));
@@ -78,7 +78,7 @@ class adminController extends application_controller {
     public  function admin_categories() {
           
         if(!isset($_SESSION['admin_name'])){
-             redirect_to(site_url()."admin/admin_login");
+             redirect_to(site_url()."siteadmin/admin_login");
         }
         
         return $this->render("views/users/admin_categories.php", compact('var', 'var2','var3'));
@@ -93,7 +93,7 @@ class adminController extends application_controller {
     public  function view_categories() {
           
         if(!isset($_SESSION['admin_name'])){
-             redirect_to(site_url()."admin/admin_login");
+             redirect_to(site_url()."siteadmin/admin_login");
         }
         
         $userDAO =new userDAO();
@@ -111,7 +111,7 @@ class adminController extends application_controller {
         $id = $_POST['cat_id'];
         $userDAO =new userDAO();
         $categories=$userDAO->update_category($id,$cat_name);
-        redirect_to(site_url()."admin/view_categories");
+        redirect_to(site_url()."siteadmin/view_categories");
 }
     public  function delete_categories($id) {
         
@@ -124,7 +124,7 @@ class adminController extends application_controller {
     public  function view_albums() {
           
         if(!isset($_SESSION['admin_name'])){
-             redirect_to(site_url()."admin/admin_login");
+             redirect_to(site_url()."siteadmin/admin_login");
         }
         
         $userDAO =new userDAO();
@@ -147,7 +147,7 @@ class adminController extends application_controller {
          $userDAO =new userDAO();
         $categories=$userDAO->add_album($album_name,$category,$created_date,$status);
         
-        redirect_to(site_url()."admin/view_albums");
+        redirect_to(site_url()."siteadmin/view_albums");
         
 }
    public  function delete_album($id) {
@@ -171,7 +171,7 @@ class adminController extends application_controller {
         $status = $_POST['status'];
         $userDAO =new userDAO();
         $categories=$userDAO->update_album($id,$album_name,$status);
-        redirect_to(site_url()."admin/view_albums");
+        redirect_to(site_url()."siteadmin/view_albums");
 }
     public  function manage_album($id) {
         $userDAO =new userDAO();
@@ -235,7 +235,34 @@ class adminController extends application_controller {
         $userDAO =new userDAO();
         $album_photos=$userDAO->get_album_images($album_id);
         //return $this->render("views/users/album_images.php", compact('album_photos', 'var2','var3'));
-        redirect_to(site_url()."admin/album_images/$album_id");
+        redirect_to(site_url()."siteadmin/album_images/$album_id");
+        
+}
+   public  function showongallery($id) {
+       
+        $userDAO =new userDAO();
+        $album_photos=$userDAO->set_on_gallery($id);
+        if($album_photos){
+            echo "<a href='javascript:void(0);' onclick='hideongallery($id)'>Hide from Gallery</a>";
+        }
+        
+}
+   public  function hidefromgallery($id) {
+       
+        $userDAO =new userDAO();
+        $album_photos=$userDAO->hide_from_gallery($id);
+        if($album_photos){
+            echo "<a href='javascript:void(0);' onclick='showongallery($id)'>Show on Gallery</a>";
+        }
+        
+}
+   public  function delete_image() {
+       $album_id = $_GET['album_id'];
+       $image_id = $_GET['image_id'];
+        $userDAO =new userDAO();
+        $album_photos=$userDAO->delet_image($album_id,$image_id);
+        redirect_to(site_url()."siteadmin/album_images/$album_id");
+        
         
 }
 

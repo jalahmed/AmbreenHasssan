@@ -66,8 +66,8 @@ $(function($) {
                     <li><a class="current" href="javascript:void(0);">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
-                        <li><a href="<?php echo site_url();?>admin/admin_categories/" title="">Add Category</a></li>
-                        <li><a href="<?php echo site_url();?>admin/view_categories/" title="">View Categories</a></li>
+                        <li><a href="<?php echo site_url();?>siteadmin/admin_categories/" title="">Add Category</a></li>
+                        <li><a href="<?php echo site_url();?>siteadmin/view_categories/" title="">View Categories</a></li>
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>

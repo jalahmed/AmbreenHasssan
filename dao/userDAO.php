@@ -206,6 +206,42 @@ class userDAO {
 
         }
     }
+       public function set_on_gallery($id){
+         try {
+            $database = new connection();
+            $connection = $database->getConnection();
+            $sql = "update images set display_on = '1' where image_id = '$id'";
+            $result = mysql_query($sql,$connection);
+            $database->close();
+            return $result;
+        }catch(Exception $e) {
+
+        }
+    }
+       public function hide_from_gallery($id){
+         try {
+            $database = new connection();
+            $connection = $database->getConnection();
+            $sql = "update images set display_on = '0' where image_id = '$id'";
+            $result = mysql_query($sql,$connection);
+            $database->close();
+            return $result;
+        }catch(Exception $e) {
+
+        }
+    }
+       public function delet_image($album_id,$image_id){
+         try {
+            $database = new connection();
+            $connection = $database->getConnection();
+            $sql = "delete from images where album_id = '$album_id' and image_id='$image_id'";
+            $result = mysql_query($sql,$connection);
+            $database->close();
+            return $result;
+        }catch(Exception $e) {
+
+        }
+    }
 }
 
 ?>
